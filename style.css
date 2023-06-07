@@ -1,0 +1,21 @@
+body {
+    background-image: url(https://images.unsplash.com/photo-1564091422888-15640d9709a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80);
+    background-size: 100%;
+    position: fixed;
+    top: 45%;
+     left: 50%;
+     width: 100%;
+     transform: translate(-50%, -50%);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.container {
+    color: rgb(0, 18, 40);
+}
+
+.card-body {
+    background-color: rgb(117, 209, 239);
+}
+
+.card-header, .card-footer {
+    background-color: rgb(170, 166, 208);
+}
