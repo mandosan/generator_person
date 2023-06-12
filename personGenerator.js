@@ -80,22 +80,6 @@ const personGenerator = {
             "id_10": "SMM – менеджер"
         }
     }`,
-    patronymicJson: `{
-        "count": 10,
-        "list": {     
-            "id_1": "Иванов",
-            "id_2": "Петров",
-            "id_3": "Сергеев",
-            "id_4": "Павлов",
-            "id_5": "Дмитриев",
-            "id_6": "Андреев",
-            "id_7": "Владимиров",
-            "id_8": "Денисов",
-            "id_9": "Алексеев",
-            "id_10": "Михайлов"
-        }
-    }`,
-
     GENDER_MALE: 'Мужчина',
     GENDER_FEMALE: 'Женщина',
 
@@ -138,13 +122,29 @@ const personGenerator = {
            return this.randomValue(this.professionFemaleJson); 
         } 
     },
-    randomPatronymic: function() { 
-        if (this.person.gender == this.GENDER_MALE) {
-            return this.randomValue(this.patronymicJson) + "ич";
-        } else {
-            return this.randomValue(this.patronymicJson) + "на";
-        }
-    },
+	   randomPatronymic: function () {
+		const obj = JSON.parse(this.firstNameMaleJson);
+		const prop = `id_${this.randomIntNumber(obj.count, 1)}`;
+		randNameForPatron = obj.list[prop];
+		switch (this.person.gender) {
+			case this.GENDER_MALE:
+				(randNameForPatron.slice(-1) === 'й') ?
+					(patron = `${randNameForPatron.replace('й', 'е')}вич`) :
+					(randNameForPatron.slice(-1) === 'а') ?
+						(patron = `${randNameForPatron.replace('а', 'ич')}`) :
+						(patron = `${randNameForPatron}ович`);
+				break;
+			case this.GENDER_FEMALE:
+				(randNameForPatron.slice(-1) === 'й') ?
+					(patron = `${randNameForPatron.replace('й', 'е')}вна`) :
+					(randNameForPatron.slice(-1) === 'а') ?
+						(patron = `${randNameForPatron.replace('а', 'ична')}`) :
+						(patron = `${randNameForPatron}овна`);
+				break;
+		}
+
+		return patron;
+	},
     randomMonth31: function randomMonth() { 
         let months = [`января`, `марта`, `мая`,	`июля`,	`августа`, `октября`, `декабря`];
         let month = months[Math.floor(Math.random() * 7)];
